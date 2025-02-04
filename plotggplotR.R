@@ -19,15 +19,13 @@ plot(iris$Petal.Length ~ iris$Petal.Width)
 points(iris$Petal.Length[iris$Species=="setosa"] ~ 
          iris$Petal.Width[iris$Species=="setosa"],
           col="red", pch=16)
-#point : rajoute des info sur le graphique
+#point : 
 
 par(mfrow=c(1,2)) 
 boxplot(iris$Petal.Length~ iris$Species)
 stripchart(iris$Petal.Length~ iris$Species)
 
-##nouveau package ggplot2
 
-#on charge le package avec library()
 
 install.packages("ggplot2")
 library(ggplot2)
@@ -85,7 +83,7 @@ starwars
        library(ggplot2)
      library(dplyr)
      
-     # Nettoyage des données pour éviter les NA et convertir en facteur
+     
      data <- starwars %>%
        filter(!is.na(height) & !is.na(mass) & !is.na(hair_color) & !is.na(gender) & !is.na(species)) %>%
        sample_n(20) %>%  # Échantillonnage pour éviter trop de points
@@ -95,15 +93,15 @@ starwars
          species = as.factor(species)
        )
      
-     # Création du graphique bien moche
+
      ggplot(data, aes(x = height, y = mass, color = hair_color, shape = gender, size = birth_year)) +
        geom_point(alpha = 0.9) + 
        geom_line(aes(linetype = species), size = 3) +  # Lignes épaisses moches
-       scale_color_manual(values = c("red", "limegreen", "cyan", "magenta", "yellow", "black", "pink", "orange", "brown")) +  # Couleurs flashy corrigées
+       scale_color_manual(values = c("red", "limegreen", "cyan", "magenta", "yellow", "black", "pink", "orange", "brown")) +  
        theme(
-         panel.background = element_rect(fill = "yellow"),  # Fond agressif
-         plot.background = element_rect(fill = "hotpink"),  # Cadre horrible
-         panel.grid.major = element_line(color = "green", linetype = "dotted", size = 2),  # Grille énorme
+         panel.background = element_rect(fill = "yellow"),  # Fond 
+         plot.background = element_rect(fill = "hotpink"),  
+         panel.grid.major = element_line(color = "green", linetype = "dotted", size = 2),
          panel.grid.minor = element_line(color = "blue", linetype = "dashed", size = 1),  
          axis.text = element_text(size = 15, angle = 90, face = "bold", color = "purple"),
          axis.title = element_text(size = 20, face = "italic", color = "blue"),
