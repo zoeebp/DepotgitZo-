@@ -1,0 +1,165 @@
+---
+title: "Rapport graphique moche"
+author: 'Zoé Pottiau '
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  pdf_document:
+    toc: true
+    toc_depth: '3'
+  html_document:
+    code_folding: hide
+    fig_caption: true
+    number_sections: true
+    toc: true
+    toc_depth: 3
+    toc_float:
+      collapsed: true
+      smooth_scroll: true
+bibliography: BRMD/Pecha_kucha.bib
+csl: "BRMD/isara-iso-690.csl"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(ade4)
+library(FactoMineR)
+```
+
+
+# Introduction
+Dans le cadre du module OPEN, nous avons cherché à produire le graphique le plus moche possible en utilisant la fonctionnalité de R **ggplot2**@jean-francois_hocquette_viande_2021].
+L'objectif de ce graphique n'est pas de présenter des insights clairs et pertinents, bien au contraire. Nous avons volontairement appliqué *des choix esthétiques discutables* .
+
+
+
+Veillez à bien gérer votre bibliographie en .bib et vos appels à citation. Vous pouvez utiliser des liens dans le texte comme ceci <https://isaranet.fr/> ou encore utiliser un lien hypertexte comme [**cela**](https://isaranet.fr/). Vous pouvez faire des listes à tiroir (en sautant bien une ligne avant de commencer) :
+
+
+
+# Les données
+
+Les données proviennent de la bibliothèque dplyr
+
+'''{r library , echo = True, eval = False}
+  install.packages("dplyr")
+  library(dplyr)
+  
+'''
+
+
+
+## Imports
+
+Nous avons ensuite importé les donnée nécessaire à la réalisation de notre graphique. 
+
+```{r imports, echo=TRUE, eval=TRUE}
+  data("starwars")
+ 
+```
+
+## Présentation
+
+Nous disposons de données sur ... :
+
+```{r sites, echo=TRUE, eval=FALSE, warning=FALSE}
+starwars
+```
+
+
+
+# Analyses
+
+## Analyses préliminaires
+
+Vous pouvez insérer dans le début du *chunk* des options pour gérer les figures comme `fig.height =`, `fig.width =` , `fig.align =` ou `fig.cap=` (pour la légende).
+
+```{r graph1, echo=TRUE, eval=TRUE, warning = FALSE, fig.height = 10, fig.width = 6, fig.align = "center", fig.cap="Fig 1: graphique moche"}
+
+       library(ggplot2)
+     library(dplyr)
+     
+     # Nettoyage des données pour éviter les NA et convertir en facteur
+     data <- starwars %>%
+       filter(!is.na(height) & !is.na(mass) & !is.na(hair_color) & !is.na(gender) & !is.na(species)) %>%
+       sample_n(20) %>%  # Échantillonnage pour éviter trop de points
+       mutate(
+         hair_color = as.factor(hair_color),
+         gender = as.factor(gender),
+         species = as.factor(species)
+       )
+     
+     # Création du graphique bien moche
+     ggplot(data, aes(x = height, y = mass, color = hair_color, shape = gender, size = birth_year)) +
+       geom_point(alpha = 0.9) + 
+       geom_line(aes(linetype = species), size = 3) +  # Lignes épaisses moches
+       scale_color_manual(values = c("red", "limegreen", "cyan", "magenta", "yellow", "black", "pink", "orange", "brown")) +  # Couleurs flashy corrigées
+       theme(
+         panel.background = element_rect(fill = "yellow"),  # Fond agressif
+         plot.background = element_rect(fill = "hotpink"),  # Cadre horrible
+         panel.grid.major = element_line(color = "green", linetype = "dotted", size = 2),  # Grille énorme
+         panel.grid.minor = element_line(color = "blue", linetype = "dashed", size = 1),  
+         axis.text = element_text(size = 15, angle = 90, face = "bold", color = "purple"),
+         axis.title = element_text(size = 20, face = "italic", color = "blue"),
+         legend.background = element_rect(fill = "black"),
+         legend.text = element_text(color = "white", size = 12),
+         plot.title = element_text(size = 30, face = "bold", color = "green")
+       ) 
+       
+```
+
+
+## Analyses multivariées
+
+### Choix des axes
+
+L'axe 1 (taille) explique `r round(var(data$height) / (var(data$height) + var(data$mass)) * 100, 2)`% de la variance,  
+tandis que l'axe 2 (masse) en explique `r round(var(data$mass) / (var(data$height) + var(data$mass)) * 100, 2)`%.
+
+
+#amélioration 
+
+Le graphique initial, bien que volontairement conçu pour être peu lisible, pourrait être optimisé afin d'améliorer la compréhension des données. Par exemple moins chargé le graphique et Une palette plus douce, comme `scale_color_brewer(palette = "Set2")`
+
+# Interpretations et Conclusion
+
+Ce graphique ne nous apprend pas grand-chose… sauf peut-être qu'un **mauvais choix de mise en forme = mauvaise compréhension**.
+
+Ce graphique est un parfait exemple de ce qu'il ne faut jamais faire enles couleurs agressives, les formes incohérentes, la mise en page chaotique et les axes illisibles , il
+
+Cependant, cette catastrophe visuelle a un mérite : elle illustre par l'absurde l'importance de la lisibilité et de la clartédasi vos spectateurs doivent plisser les yeux pour comprendre votre message, c'est que votre graphique est raté @chriki_viande_2020.
+
+Morale de l'histoire : un bon graphique est comme un bon Jedi, il doit être équilibré, clair et accessible– et non pas sombre @
+# Références
+
+## Liens
+
+ISARA : <https://isaranet.fr/> consulté le ...
+
+## Bibliographie
+
+Liste des publications :
+#
+
+@online{jean-francois_hocquette_viande_2021,
+	title = {La viande in vitro, une voie exploratoire controversée {\textbar} {INRAE}},
+	url = {https://www.inrae.fr/actualites/viande-vitro-voie-exploratoire-controversee},
+	abstract = {Cultiver des cellules musculaires pour produire de la viande in vitro : une solution qui parait séduisante pour épargner les animaux, libérer des terres agricoles et réduire l’impact environnemental de l’élevage…Mais est-ce une solution réaliste ? De quel côté penche la balance coûts-bénéfices ? Entretien avec Jean-François Hocquette, physiologiste et spécialiste des produits animaux.},
+	author = {Jean-François Hocquette},
+	urldate = {2024-11-25},
+	date = {2021-01-06},
+	langid = {french},
+	file = {Snapshot:C\:\\Users\\zoepo\\Zotero\\storage\\XUQ4IHPK\\viande-vitro-voie-exploratoire-controversee.html:text/html},
+}
+
+@online{chriki_viande_2020,
+	title = {Viande in vitro},
+	url = {https://www.techniques-ingenieur.fr/base-documentaire/procedes-chimie-bio-agro-th2/filiere-de-production-produits-d-origine-animale-autres-que-laitiers-42432210/viande-in-vitro-f6520/},
+	abstract = {Savez-vous que la culture in vitro de protéines animales pourrait répondre à la fois à la problématique de l’augmentation de la demande alimentaire et aux enjeux de développement durable ? Mais quelle serait son acceptation sociale, éthique et religieuse par les consommateurs ?},
+	titleaddon = {Techniques de l'Ingénieur},
+	author = {{CHRIKI}, Sghaier and {ELLIES}-{OURY}, Marie-Pierre and {HOCQUETTE}, Jean François},
+	urldate = {2024-11-25},
+	date = {2020-12-10},
+	langid = {french},
+	file = {Snapshot:C\:\\Users\\zoepo\\Zotero\\storage\\F5EYXNU9\\viande-in-vitro-f6520.html:text/html},
+}
