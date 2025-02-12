@@ -1,0 +1,103 @@
+---
+title: "Le partage des données agricole en France"
+author: 'Zoé Pottiau '
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  pdf_document:
+    toc: true
+    toc_depth: '3'
+  html_document:
+    code_folding: hide
+    fig_caption: true
+    number_sections: true
+    toc: true
+    toc_depth: 3
+    toc_float:
+      collapsed: true
+      smooth_scroll: true
+bibliography: data/biblio_open.bib
+csl: "data/isara-iso-690.csl"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(ade4)
+library(FactoMineR)
+```
+
+
+\newpage
+
+
+
+# Constat
+
+Aujourd'hui en France, les 604 000 agriculteurs installés sont de plus en plus connectés et génèrent une grande quantité de données. Une exploitation agricole peut ainsi disposer jusqu'à 35 points de collecte de données : comprenant par exemple, des machines connectées (robot de traite, épandeurs,etc..), des informations issues de capteurs (météo,Ndonnées GPS), des logiciels de gestion parcellaire ou de gestion d'élevage, etc... Ces données sont des informations précieuses et nécessaires pour répondre aux enjeux de traçabilité, de souveraineté alimentaire ou de décarbonation (mesures de production de biomasse, indicateurs environnementaux, etcc.) tout en optimisant les rendements et en réduisant l'impact environnemental.@picardat_enjeux_2024
+
+
+```{r, echo=FALSE,  fig.cap="", out.width="90%"}
+knitr::include_graphics("data/image.jpg")
+```
+
+
+
+
+# Problématique : Collecte  des données à l’échelle de l’exploitation agricole et leur usages 
+
+La  collecte de ces données, leur partage et leur utilisation posent plusieurs problématiques techniques, économiques et réglementaires. En effet ces données sont nombreuses, variées et de sources **hétérogènes**!  La collecte et le stockage de ces données se font via des outils qui peuvent être différents d’une exploitation à une autre. De plus l'agriculteur, bien qu'il crée la data par son activité, ne dispose pas  forcément des outils pour traiter et utiliser ces données dans son intérêt. 
+
+
+# Interopérabilité des données
+
+
+Pour répondre à cette problématique, en 2015, le plan *Innovation Agriculture 2025 a été mis en place par le ministère de l'agriculture, qui prévoyait notamment un programme de recherche sur la "Technologie Robotique et Numérique pour l'agriculture" et la mise en place d'un portail de données et de services numériques pour une agriculture française compétitive, ouverte et souveraine. @picardat_enjeux_2024
+
+Aujourd'hui plusieurs projets +/- en cours travaillent sur les prémisses de la première infrastructure française de partage de données agricole, répondant aux enjeux de la durabilité, l'innovation et la souveraineté.
+
+\newpage
+
+## Qualité des données
+
+Les données issues des exploitations agricoles sont variées et hétérogènes du fait des nombreux points de collecte dont elles proviennent. Elles sont aussi décentralisées car stockées chez les différents partenaires de l'exploitation. 
+
+La variabilité et l'hétérogénéité des données issues des exploitations agricoles rendent leur exploitation complexe. La fiabilité des informations collectées est essentielle pour assurer une prise de décision efficace. Les erreurs de mesure, les formats incompatibles et le manque de mise à jour des données sont des obstacles majeurs.
+
+
+## Standardisation des données
+
+Les données sont actuellement stockées de manière décentralisée et dispersée entre les différents partenaires de l'exploitation agricole. L'absence de normes communes pour le format et le stockage des données empêche une bonne interopérabilité entre les systèmes et les acteurs du secteur. Plusieurs initiatives cherchent à harmoniser ces données pour faciliter l'intégration dans des outils de gestion plus centralisés, telles que celles utilisées par Agro EDI Europe, AFNOR/AgriFoodData et ISO CT 34.
+
+# Transfert des données
+
+Le partage des données entre exploitants, fournisseurs de services et institutions publiques est un enjeu central. L'échange d'informations permet d'améliorer la prédiction des rendements, d'optimiser l'utilisation des intrants et de réduire l'impact environnemental. Toutefois, le transfert de ces données doit être sécurisé pour éviter tout risque de fuite ou d'utilisation abusive. Les plateformes collaboratives et les solutions basées sur la blockchain offrent des perspectives intéressantes pour garantir la traçabilité et la sécurité des échanges.
+
+
+
+#Réglementation sur l'usage des données
+
+L'utilisation des données agricoles est encadrée par différentes réglementations, notamment le Règlement Général sur la Protection des Données (RGPD) qui impose un cadre strict sur la collecte et le traitement des informations personnelles. La différence entre données personnelles et professionnelles est parfois difficile en agriculture @earl_de_levangile_1_2025. La réglementation européenne sur la data avec ces réglements fondateurs que sont le Data Gouvernance Act ( en application depuis septembre 2023 ) et le Data Act ( application prévue en 2025) permet d’adresser l’assymétrie de taille entre les petites structure ( exploitations agricoles) et les multinationales ( firmes phytosanitaires ou machinistes agricoles) en instaurant 2 principes fondamentaux :
+
+* Le consentement obligatoire à l’usage des données. Depuis septembre 2023, les  exploitants agricoles doivent être informés et consentir à l'utilisation de leurs données.
+Définit un nouveau rôle d’intermédiaire de données agricoles, structure neutre qui ne doit ni stocker, ni transformer les données mais simplement de garantir un transfert fiable et sécuriser des données à un ou plusieurs destinataires/utilisateurs.
+
+
+
+
+* En France, la loi SREN ( Sécuriser et Réguler l’Espace Numérique) a été publiée en juin 2024 et transpose dans le droit français la réglementation européenne sur la Data. C’est ARCEP (  Autorité de régulation des communications électroniques, des postes et de la distribution de la presse) qui a été nommée pour s’assurer de la bonne application de cette réglementation.
+
+* L’intermédiaire agricole français, Agdatahub, par manque de soutien financier a fait faillite en décembre 2024. La question de la gouvernance des données agricoles doit être clarifiée pour définir qui peut accéder aux informations et à quelles fins. 
+
+
+
+                                    
+
+# Conclusion
+
+Le partage des données agricoles en France représente une belle opportunité pour moderniser le secteur, mais il soulève aussi des questions techniques et juridiques. Pour tirer pleinement partie du numérique, il faut travailler sur l'interopérabilité des systèmes, sécuriser les transferts de données et respecter les règles en place. Cela nécessite une véritable coopération entre les agriculteurs, les entreprises technologiques et les pouvoirs publics, afin de créer un écosystème de données transparent et efficace. L'État a un rôle clé à jouer en proposant des outils sécurisés pour l'échange de données, comme ceux développés par Agdatahub. Les Chambres d'agriculture, quant à elles, accompagnent le développement du numérique tout en veillant à préserver les intérêts des agriculteurs grâce à ces infrastructures publiques. @picardat_agridataspace_2024,@laura_letourneau_plaidoyer_2024
+
+
+## Bibliographie
+
+
+
